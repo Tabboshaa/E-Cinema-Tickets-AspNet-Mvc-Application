@@ -1,12 +1,10 @@
-﻿namespace eTickets.Models.Services
+﻿using eTickets.Models.Repositories;
+
+namespace eTickets.Models.Services
 {
-    public interface IActorService
+    public interface IActorService:IRepository<Actor>
     {
-        Task<IReadOnlyList<Actor>> GetAllActorAsync();
-        Task<Actor> GetActorAsync(int id );
-        Task AddActorAsync(Actor actor);
-        Task<Actor> UpdateActorAsync(Actor actor);
-        Task DeleteActor(Actor actor);
+
 
     }
 }

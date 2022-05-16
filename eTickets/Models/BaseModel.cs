@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using eTickets.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace eTickets.Models
 {
-    public class BaseModel
+    public class BaseModel :IEntityBase
     {
         public int id { get; set; }
         [Display(Name ="Profile Picture")]

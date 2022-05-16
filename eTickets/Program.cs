@@ -1,4 +1,5 @@
 using eTickets.Data;
+using eTickets.Models.Repositories;
 using eTickets.Models.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +12,9 @@ Services.AddControllersWithViews();
 Services.AddDbContext<AppDbContext>(options=>options.UseSqlServer(builder.
     Configuration.GetConnectionString("DefaultConnectionStrings")));
 
-Services.AddScoped<IActorService,ActorService>();
+//Services.AddScoped<IActorService,ActorService>();
+Services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
+
 
 var app = builder.Build();
 

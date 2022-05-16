@@ -1,5 +1,6 @@
 ﻿using eTickets.Data;
 using eTickets.Models;
+using eTickets.Models.Repositories;
 using eTickets.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,16 +9,16 @@ namespace eTickets.Controllers
 {
     public class ActorsController : Controller
     {
-        private readonly IActorService actorService;
+        private readonly IRepository<Actor> actorService;
 
-        public ActorsController( IActorService actorService)
+        public ActorsController( IRepository<Actor> actorService)
         {
             this.actorService = actorService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var data= await actorService.GetAllActorAsync();
+            var data= await actorService.GetAllAsync();
             return View(data);
         }
         [HttpGet]
@@ -32,13 +33,13 @@ namespace eTickets.Controllers
             {
                 return View(actor);
             }
-            await actorService.AddActorAsync(actor);
+            await actorService.AddAsync(actor);
             return RedirectToAction(nameof(Index));
          }
 
         public async Task<IActionResult> Details(int id)
         {
-            var actor= await actorService.GetActorAsync(id);
+            var actor= await actorService.GetEntityAsync(id);
             if(actor == null)
             {
                 return View("NotFound");
@@ -49,7 +50,7 @@ namespace eTickets.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var actor = await actorService.GetActorAsync(id);
+            var actor = await actorService.GetEntityAsync(id);
             if(actor == null)
             {
                 return View("NotFound");
@@ -59,14 +60,14 @@ namespace eTickets.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Actor actor)
         {
-          await actorService.UpdateActorAsync(actor);
+          await actorService.UpdateAsync(actor);
            
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Delete(int id )
         {
          
-          var actor = await actorService.GetActorAsync(id);
+          var actor = await actorService.GetEntityAsync(id);
             if (actor == null) { return View("NotFound"); }
           return RedirectToAction(nameof(Index));
         }

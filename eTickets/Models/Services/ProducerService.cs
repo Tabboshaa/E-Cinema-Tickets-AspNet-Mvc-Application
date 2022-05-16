@@ -1,15 +1,15 @@
 ﻿using eTickets.Data;
 using eTickets.Models.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace eTickets.Models.Services
 {
-    public class ActorService : Repository<Actor>
+    public class ProducerService : Repository<Producer>
     {
         private readonly AppDbContext context;
 
-        public ActorService(AppDbContext context) : base(context)
+        public ProducerService(AppDbContext context) : base(context)
         {
+            this.context = context;
         }
     }
 }

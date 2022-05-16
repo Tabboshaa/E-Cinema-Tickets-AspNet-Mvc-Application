@@ -2,9 +2,9 @@
 
 namespace eTickets.Models
 {
-    public class Cinema
+    public class Cinema:IEntityBase
     {
-        public int Id { get; set; }
+        public int id { get; set; }
         [Display(Name ="Cinema Name")]
         public string Name { get; set; }
         [Display(Name ="Description")]
