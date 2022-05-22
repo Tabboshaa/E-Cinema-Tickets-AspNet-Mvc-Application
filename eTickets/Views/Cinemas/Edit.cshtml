@@ -1,11 +1,11 @@
-﻿@model Actor
+﻿@model Cinema
 @{
     ViewBag.title = "Add a ew actor";
 }
 <div class="row">
     <div class="col-md-8 offset-2">
         <p>
-            <h1>Edit @Model.FullName </h1>
+            <h1>Edit @Model.Name </h1>
         </p>
         <div class="row text">
             <div class="col-md-8 offset-2"> 
@@ -17,19 +17,19 @@
                         <img class="rounded-circle"  id="ProfilePicturePreview"/>
                     </div>
                     <div>
-                        <label asp-for="ProfilePictureURL" class="form-label"> </label>
-                        <input asp-for="ProfilePictureURL" class="form-control"/>
-                        <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
+                        <label asp-for="Logo" class="form-label"> </label>
+                        <input asp-for="Logo" class="form-control"/>
+                        <span asp-validation-for="Logo" class="text-danger"></span>
                     </div>
                     <div>
-                        <label asp-for="FullName" class="form-label"></label>
-                        <input asp-for="FullName" class="form-control"/>
-                        <span asp-validation-for="FullName" class="text-danger"></span>
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control"/>
+                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div>
-                        <label asp-for="Bio" class="form-label"></label>
-                        <input asp-for="Bio" class="form-control"/>
-                        <span asp-validation-for="Bio" class="text-danger"></span>
+                        <label asp-for="Description" class="form-label"></label>
+                        <input asp-for="Description" class="form-control"/>
+                        <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-gruop mt-2">
                         <input type="submit" value="Edit" class="btn btn-outline-success float-right" />
@@ -45,9 +45,9 @@
         $(document).ready(function(){
   
             var output=document.getElementById("ProfilePicturePreview");
-            output.src=$("#ProfilePictureURL").val(); 
+            output.src=$("#Logo").val(); 
         });
-        $("#ProfilePictureURL").on("change",function()
+        $("#Logo").on("change",function()
         {
             var output=document.getElementById("ProfilePicturePreview");
             output.src=$(this).val(); 

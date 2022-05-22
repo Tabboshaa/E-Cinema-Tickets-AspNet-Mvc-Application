@@ -60,7 +60,7 @@ namespace eTickets.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Actor actor)
         {
-          await actorService.UpdateAsync(actor);
+            await actorService.UpdateAsync(actor);
            
             return RedirectToAction(nameof(Index));
         }
@@ -68,7 +68,8 @@ namespace eTickets.Controllers
         {
          
           var actor = await actorService.GetEntityAsync(id);
-            if (actor == null) { return View("NotFound"); }
+          if (actor == null) { return View("NotFound"); }
+           await actorService.Delete(actor);
           return RedirectToAction(nameof(Index));
         }
 

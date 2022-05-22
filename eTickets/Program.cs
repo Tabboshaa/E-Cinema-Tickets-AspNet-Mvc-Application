@@ -13,6 +13,7 @@ Services.AddDbContext<AppDbContext>(options=>options.UseSqlServer(builder.
     Configuration.GetConnectionString("DefaultConnectionStrings")));
 
 //Services.AddScoped<IActorService,ActorService>();
+Services.AddScoped<IMovieServices, MovieServices>();
 Services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
 
 

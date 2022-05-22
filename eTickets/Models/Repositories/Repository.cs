@@ -1,6 +1,7 @@
 ﻿using eTickets.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Linq.Expressions;
 
 namespace eTickets.Models.Repositories
 {
@@ -19,17 +20,11 @@ namespace eTickets.Models.Repositories
             await context.SaveChangesAsync();
         }
 
-        public async Task Delete( int id )
-        {
-            var e = GetEntityAsync(id);
-            EntityEntry entityEntry = context.Entry<Task<T>>(e);
-            entityEntry.State = EntityState.Modified;
-        }
 
         public async Task<T> GetEntityAsync(int id)
         {
           var result=  await context.Set<T>().FirstOrDefaultAsync(x=>x.id==id);
-            return result;
+                return result;
         }
 
         public async Task<IReadOnlyList<T>> GetAllAsync()
@@ -38,11 +33,26 @@ namespace eTickets.Models.Repositories
 
             return result;
         }
+        public async Task<IReadOnlyList<T>> GetAllAsync(params Expression<Func<T,object>>[] includeProperties)
+        {
+            IQueryable<T> query = context.Set<T>();
 
+            query = includeProperties.Aggregate(query,(current, includeProperties) => current.Include(includeProperties));
+            var result = await query.ToListAsync();
+            return result;
+        }
         public async Task UpdateAsync(T entity)
         {
-            EntityEntry entityEntry = context.Entry<T>(entity);
+            EntityEntry entityEntry =  context.Entry<T>(entity);
             entityEntry.State=EntityState.Modified;
+             await context.SaveChangesAsync();
+        }
+        public async Task Delete(T entity )
+        {
+            EntityEntry entityEntry = context.Entry<T>(entity);
+            entityEntry.State = EntityState.Deleted;
+            await context.SaveChangesAsync();
+
         }
     }
 }

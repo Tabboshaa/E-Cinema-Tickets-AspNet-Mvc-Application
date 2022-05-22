@@ -1,4 +1,4 @@
-﻿@model Actor
+﻿@model Producer
 @{
     ViewBag.title = "Add a ew actor";
 }
@@ -14,7 +14,7 @@
 
                     </div>
                     <div class="form-group text-center">
-                        <img class="rounded-circle"  id="ProfilePicturePreview"/>
+                        <img class="rounded-circle" style="max-width:175px" id="ProfilePicturePreview"/>
                     </div>
                     <div>
                         <label asp-for="ProfilePictureURL" class="form-label"> </label>
@@ -32,8 +32,8 @@
                         <span asp-validation-for="Bio" class="text-danger"></span>
                     </div>
                     <div class="form-gruop mt-2">
-                        <input type="submit" value="Edit" class="btn btn-outline-success float-right" />
-                        <a class="btn btn-outline-secondary" asp-action="index">Show All</a>
+                        <input  type="submit" value="Edit" class="btn btn-outline-success float-right" />
+                        <a asp-action="index" class="btn btn-outline-secondary" >Show All</a>
                     </div>
                 </form>
             </div>
