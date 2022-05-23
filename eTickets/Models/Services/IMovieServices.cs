@@ -7,6 +7,6 @@ namespace eTickets.Models.Services
     {
         Task<Movie> GetMovieById(int id);
         Task<CreateMovieDropDownsVM> GetCreateMovieDropDownsValues();
-       // Task<Movie> AddMovieAsync(Movie movie , CreateMovieDropDownsVM createMovieDropDownsVM);
+        Task AddMovieAsync(CreateMovieVM createMovieVM);
     }
 }

@@ -14,10 +14,35 @@ namespace eTickets.Models.Services
             this.context = context;
         }
 
-        //public async Task<Movie> AddMovieAsync(Movie movie , CreateMovieDropDownsVM createMovieDropDownsVM)
-        //{
-          
-        //}
+        public async Task AddMovieAsync(CreateMovieVM createMovieVM)
+        {
+           var movie = new Movie()
+           {
+               Name=createMovieVM.Name,
+               Description=createMovieVM.Description,
+               StartDate  =createMovieVM.StartDate,
+               EndDate=createMovieVM.EndDate,
+               Price=createMovieVM.Price,
+               CinemaId=createMovieVM.CinemaId,
+               ProducerId=createMovieVM.ProducerId,
+               ImageURL=createMovieVM.ImageURL,
+           };
+            await context.Movies.AddAsync(movie);
+            await context.SaveChangesAsync();
+            foreach(var actorid in createMovieVM.ActorIds)
+            {
+                var actor_movie = new Actor_Movie()
+                {
+                    ActorId = actorid,
+                    MovieId = movie.id
+                };
+                await context.Actor_Movies.AddAsync(actor_movie);
+            }
+            await context.SaveChangesAsync();
+
+        }
+
+
 
         public async Task<CreateMovieDropDownsVM> GetCreateMovieDropDownsValues()
         {
